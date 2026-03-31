@@ -1,20 +1,29 @@
 // For sprite only functionality (untested)
-#define USER_SETUP_ID 0
+// ==============================================
+// ESP32-S3-CAM + ST7735 1.8寸 128x160 屏幕专用配置
+// ==============================================
 
-#define TFT_WIDTH  1000
-#define TFT_HEIGHT 1000
+// 1. 选择屏幕驱动
+#define ST7735_DRIVER      // 定义ST7735驱动
+#define ST7735_REDTAB      // 1.8寸128x160屏幕用这个tab
+#define TFT_WIDTH  128     // 屏幕宽度
+#define TFT_HEIGHT 160     // 屏幕高度
 
-#define TFT_INIT_DELAY 0
+// 2. 屏幕引脚定义（完全避开摄像头，零冲突）
+#define TFT_MOSI 47    // VSPI MOSI
+#define TFT_SCLK 45    // VSPI SCK
+#define TFT_CS   42    // 片选
+#define TFT_DC   41    // 数据/命令
+#define TFT_RST  40    // 复位
+#define TFT_BL   39    // 背光（可选，接3V3常亮可注释）
 
-#define TFT_NOP     0x00
-#define TFT_SWRST   0x00
+// 3. SPI配置（稳定优先）
+#define SPI_FREQUENCY  27000000  // 27MHz，ST7735黄金稳定频率
+#define SPI_READ_FREQUENCY  20000000
 
-#define TFT_CASET   0x00
-#define TFT_PASET   0x00
-#define TFT_RAMWR   0x00
-
-#define TFT_RAMRD   0x00
-#define TFT_IDXRD   0x00
+// 4. 颜色校正（避免偏色）
+#define TFT_RGB_ORDER TFT_BGR
+#define TFT_INVERSION_ON
 
 /*
 #define TFT_MADCTL  0x00
